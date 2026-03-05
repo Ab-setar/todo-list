@@ -1,30 +1,30 @@
-import "./App.css";
+//import "./App.css";
 import { useState } from "react";
-import TodoForm from "./TodoForm";
-import TodoItem from "./TodoItem";
+import TodoForm from "./components/TodoForm";
+import TodoItem from "./components/TodoItem";
 
 function App() {
 	const [todos, setTodos] = useState([]);
-
 	const addTodo = (text) => {
 		const newTodo = {
 			id: Date.now(),
 			text: text,
 			completed: false,
 		};
-		setTodos([...todos, newTodo]);
+
+		setTodos((prevTodos) => [...prevTodos, newTodo]);
 	};
 
 	const toggleTodo = (id) => {
-		setTodos(
-			todos.map((todo) =>
+		setTodos((prevTodos) =>
+			prevTodos.map((todo) =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
 			),
 		);
 	};
 
 	const deleteTodo = (id) => {
-		setTodos(todos.filter((todo) => todo.id !== id));
+		setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
 	};
 
 	return (
